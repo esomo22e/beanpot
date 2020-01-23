@@ -20,15 +20,7 @@ d3.json('/interactive/2018/10/bubble/data/aggregated.json')
 
   columnTemplate(data, "#column");
 
-  groupedColumnTemplate(data, "#groupedcolumn");
 
-  lineTemplate(data, "#line");
-
-  multiLineTemplate(data, "#multiline");
-
-    barTemplate(data, "#bar");
-
-   groupedbarTemplate(data, "#groupedbar");
 
 }).catch(function(error){
    // handle error
