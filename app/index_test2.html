@@ -105,13 +105,21 @@
     	.range([0, height]);
 
     var voronoi = d3.voronoi()
-    	.x(d => x(d.year))
-    	.y(d => y(d.rank))
+    	.x(function(d){
+        return x(d.year);
+      })
+    	.y(function(d){
+        return y(d.rank);
+      })
     	.extent([[-margin.left / 2, -margin.top / 2], [width + margin.right / 2, height + margin.bottom / 2]]);
 
     var line = d3.line()
-    	.x(d => x(d.year))
-    	.y(d => y(d.rank))
+    	.x(function(d){
+        return x(d.year);
+      })
+    	.y(function(d){
+        return y(d.rank);
+      })
 // Uncomment this to use monotone curve
 //     	.curve(d3.curveMonotoneX);
 
@@ -130,7 +138,7 @@
         }
         parsedData.push(dObj);
       });
-
+      console.log(parsedData);
 
       var xTickNo = parsedData[0].ranks.length;
       x.domain(d3.extent(parsedData[0].ranks, d => d.year));
@@ -184,15 +192,17 @@
       		.attr("class", "grid-line")
       		.attr("x1", 0)
       		.attr("x2", width)
-      		.attr("y1", d => y(d))
-      		.attr("y2", d => y(d));
+      		.attr("y1", function(d){ return y(d);})
+      		.attr("y2", function(d){ return y(d);});
 
       var lines = svg.append("g")
       	.selectAll("path")
       	.data(parsedData)
       	.enter().append("path")
       		.attr("class", "rank-line")
-      		.attr("d", function(d) { d.line = this; return line(d.ranks)})
+      		.attr("d", function(d) {
+                console.log(d.line);
+                d.line = this; return line(d.ranks)})
       		.attr("clip-path", "url(#clip)")
       		.style("stroke", d => colour(d.department))
       		.style("stroke-width", cfg.strokeWidth)
@@ -254,7 +264,16 @@
       		.on("mouseout", mouseout);
 
       svg.selectAll(".rank-line")
-      	.each(d => highlight.includes(d.department) ? d.line.parentNode.appendChild(d.line) : 0);
+      	.each(function(d){
+          if(highlight.includes(d.department)){
+            return d.line.parentNode.appendChild(d.line)
+          }
+          else{
+            return 0;
+          }
+        })
+
+          // d => highlight.includes(d.department) ? d.line.parentNode.appendChild(d.line) : 0);
 
       svg.select("g.end-labels").raise();
 
