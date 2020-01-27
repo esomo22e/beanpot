@@ -61,3 +61,52 @@ text {
   fill-opacity: 0.7;
 /*       text-anchor: middle; */
 }
+
+/////////////Slider///////////////////
+.nav-tabs{
+  font-size: 14px;
+}
+
+
+.axisEnhancerID line, .axisEnhancerID path {
+  stroke: none;
+}
+
+.axisTransciptionFactor line, .axisTransciptionFactor path{
+  stroke: none;
+}
+
+.axis text {
+  font-size: 8px;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  font-family: "Arial";
+
+}
+
+.slider_container {
+    margin: 15px 0 0;
+}
+
+.slider_value {
+    margin: 10px 0;
+}
+
+.text_container {
+    display: flex;
+    font-family: Arial;
+    padding: 0 10px;
+}
+
+#slider {
+    margin: 4px 40px 0;
+}
+
+#slider {
+    margin: 4px 40px 0;
+}
+
+//////////////The Resgt
+
+h1{
+    text-align: center;
+}
