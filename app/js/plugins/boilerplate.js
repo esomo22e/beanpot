@@ -167,6 +167,8 @@ d3.json("/interactive/2018/10/bubble/data/beanpot_schoolrank.json", function(err
                                 return (list_schools.indexOf(d.school) + 1) * 500;
                             })
                             .style("opacity",1);
+
+
     $(function() {
         $("#slider").slider({
             range: false,
@@ -243,9 +245,7 @@ d3.json("/interactive/2018/10/bubble/data/beanpot_schoolrank.json", function(err
                          return line(d.ranks);
                      })
                      // .attr("clip-path", "url(#clip)")
-                     .style("stroke", function(d){
-                         return colour(d.school);
-                     })
+                     .style("stroke", "black")
                      .style("stroke-width", cfg.strokeWidth)
                      .style("opacity", 1);
     }
