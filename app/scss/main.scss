@@ -202,3 +202,16 @@ p.text{
     margin-left: 3px;
     margin-top: 10px;
 }
+
+//////////Button
+#button_container{
+  display: flex;
+margin-left: auto;
+margin-right: auto;
+width: 10%;
+}
+
+button{
+  // padding: 10px;
+  margin: 0 10px;
+}
