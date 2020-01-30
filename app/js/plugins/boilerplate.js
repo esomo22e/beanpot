@@ -12,7 +12,7 @@ var margin = {
 var formatDateIntoYear = d3.timeFormat("%y");
 
 var width = window.innerWidth - margin.left - margin.right,
-height = 780 - margin.top - margin.bottom;
+height = 500 - margin.top - margin.bottom;
 var svg = d3.select("#beanpot").append("svg")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
@@ -49,6 +49,32 @@ var icon = {
     "rank_bu": "../../assets/bu_logo.svg",
     "rank_bc": "../../assets/bc_logo.png"
 }
+
+var tooltip = d3.select("#beanpot")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+    .style("position","absolute")
+
+    var mouseover = function(d) {
+        tooltip
+          .style("opacity", 1)
+      }
+      var mousemove = function(d) {
+        tooltip
+          .html(Math.round(x.invert(d3.event.x - margin.left)) + " Men's Beanpot")
+          .style("left", (d3.event.x + 10) + "px")
+          .style("top", (d3.event.y + 10) + "px")
+      }
+      var mouseleave = function(d) {
+        tooltip
+          .style("opacity", 0)
+      }
 
 d3.json("/interactive/2018/10/bubble/data/beanpot.json", function(error, data) {
    if (error) throw error;
@@ -214,8 +240,19 @@ d3.json("/interactive/2018/10/bubble/data/beanpot.json", function(error, data) {
         })
         .style("opacity", 0.2);
 
+        var tooltipgrid = svg.append("rect")
+         .attr("class","tooltip-grid")
+         .attr("width", width)
+         .attr("height", height)
+         .attr("opacity", 0)
+         .on("mouseover", mouseover)
+         .on("mousemove", mousemove)
+         .on("mouseleave", mouseleave)
+
 
    function drawData(parsedData, yearLimit) {
+
+      d3.select(".tooltip-grid").remove();
 
       var lines = svg.append("g")
                         .selectAll("path")
@@ -292,6 +329,14 @@ d3.json("/interactive/2018/10/bubble/data/beanpot.json", function(error, data) {
         })
         .style("opacity", 1);
 
+        var tooltipgrid = svg.append("rect")
+         .attr("class","tooltip-grid")
+         .attr("width", width)
+         .attr("height", height)
+         .on("mouseover", mouseover)
+         .on("mousemove", mousemove)
+         .on("mouseleave", mouseleave)
+
         // endDots.exit().remove();
 
         // endDots.exit().remove();
@@ -364,11 +409,13 @@ slider.insert("g", ".track-overlay")
       // .attr("width", 10)
       // .attr("height", 10);
 
-      var label = slider.append("text")
-          .attr("class", "label")
-          .attr("text-anchor", "middle")
-          .text("1952")
-          .attr("transform", "translate(0," + (-25) + ")");
+   var label = slider.append("text")
+       .attr("class", "label")
+       .attr("text-anchor", "middle")
+       .text("1952")
+       .attr("transform", "translate(0," + (-25) + ")");
+
+
 
 
    function moveSlider(h) {
