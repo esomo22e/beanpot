@@ -50,7 +50,7 @@ var icon = {
     "rank_bc": "../../assets/bc_logo.png"
 }
 
-d3.json("/interactive/2018/10/bubble/data/beanpot_schoolrank.json", function(error, data) {
+d3.json("/interactive/2018/10/bubble/data/beanpot.json", function(error, data) {
    if (error) throw error;
 
    var parsedData = [];
@@ -64,20 +64,26 @@ d3.json("/interactive/2018/10/bubble/data/beanpot_schoolrank.json", function(err
          // console.log(year);
          if (year != "school") {
             if (d[year] != 0) {
-               // console.log(d[year]);
+
+               if(d.school != "final_winner_score" && d.school != "final_loser_score"
+               && d.school != "thirdplace_loser_score" && d.school != "thirdplace_winner_score" ){
+
+
+               console.log(d.school);
                dataObject.ranks.push({
                   year: +year,
                   rank: +d[year],
                   school: dataObject
                });
                // console.log(+year);sf
+                  }
             }
          }
       }
       parsedData.push(dataObject);
       //
    });
-   // console.log(parsedData);
+   console.log(parsedData);
    var xTickNo = parsedData[0].ranks.length;
    // console.log(xTickNo);
    x.domain(d3.extent(parsedData[0].ranks, function(d) {
