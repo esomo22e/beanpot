@@ -73,26 +73,26 @@ d3.queue()
           tooltip
             .style("opacity", 1)
         }
-        var mousemove = function(d) {
-           for (var g=0; g<gameresults.length; g++)
-            if (gameresults[g].year == Math.round(x.invert(d3.event.x - margin.left))) {
-               tooltip
-                 .html(
-                    "<h3>" + Math.round(x.invert(d3.event.x - margin.left)) + " Men's Beanpot</h3>" +
-                    "<h4>Final</h4>" +
-                    gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score +
-                    "<h4>Third-Place Game</h4>" +
-                    gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
-                 )
-                 .style("left", (d3.event.x + 10) + "px")
-                 .style("top", (d3.event.y + 10) + "px")
-            }
+     var mousemove = function(d) {
+        for (var g=0; g<gameresults.length; g++)
+         if (gameresults[g].year == Math.round(x.invert(d3.event.x - margin.left))) {
+            tooltip
+              .html(
+                 "<h3>" + Math.round(x.invert(d3.event.x - margin.left)) + " Men's Beanpot</h3>" +
+                 "<h4>Final</h4>" +
+                 gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score +
+                 "<h4>Third-Place Game</h4>" +
+                 gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
+              )
+              .style("left", (d3.event.x + 10) + "px")
+              .style("top", (d3.event.y + 10) + "px")
+         }
 
-        }
-        var mouseleave = function(d) {
-          tooltip
-            .style("opacity", 0)
-        }
+     }
+     var mouseleave = function(d) {
+       tooltip
+         .style("opacity", 0)
+     }
 
       var parsedData = [];
       data.forEach(function(d) {
@@ -352,6 +352,7 @@ d3.queue()
                .attr("class","tooltip-grid")
                .attr("width", width)
                .attr("height", height)
+               .attr("opacity", 0)
                .on("mouseover", mouseover)
                .on("mousemove", mousemove)
                .on("mouseleave", mouseleave)
@@ -424,7 +425,10 @@ d3.queue()
 
       var handle = slider.insert("circle", ".track-overlay")
          .attr("class", "handle")
-         .attr("r", 9);
+         .attr("r", 9)
+         .on("mouseover", mouseover)
+         .on("mousemove", mousemove)
+         .on("mouseleave", mouseleave);
          // .attr("width", 10)
          // .attr("height", 10);
 
@@ -438,12 +442,13 @@ d3.queue()
 
 
       function moveSlider(h) {
-         console.log(h);
-         // console.log(x(h));
+         if (h < 1952) { h = 1952 };
+         if (h > 2019) { h = 2019};
+         h = Math.round(h);
          handle.attr("cx", x(h));
          label
-     .attr("x", x(h))
-     .text(h);
+           .attr("x", x(h))
+           .text(h);
          d3.selectAll("path").remove();
          d3.selectAll(".end-circle").remove();
 
