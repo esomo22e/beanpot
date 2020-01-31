@@ -405,8 +405,8 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
         label
             .attr("x", x(h))
             .text(h);
-        d3.selectAll("path").remove();
-        d3.selectAll(".end-circle").remove();
+        svg.selectAll("path").remove();
+        svg.selectAll(".end-circle").remove();
         // console.log(parsedData);
         drawData(parsedData, h);
     }
@@ -655,7 +655,7 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
         .style("opacity", 0.2);
 
         var tooltip2grid = svg2.append("rect")
-            .attr("class","tooltip-grid")
+            .attr("class","tooltip2-grid")
             .attr("width", width)
             .attr("height", height)
             .attr("opacity", 0)
@@ -803,7 +803,7 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
             .style("opacity", 1);
 
             var tooltipgrid = svg2.append("rect")
-                .attr("class","tooltip-grid")
+                .attr("class","tooltip2-grid")
                 .attr("width", width)
                 .attr("height", height)
                 .attr("opacity", 0)
@@ -821,8 +821,8 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
         label
             .attr("x", x(h))
             .text(h);
-        d3.selectAll("path").remove();
-        d3.selectAll(".end-circle").remove();
+        svg2.selectAll("path").remove();
+        svg2.selectAll(".end-circle").remove();
         // console.log(parsedData);
         drawData(parsedData, h);
     }

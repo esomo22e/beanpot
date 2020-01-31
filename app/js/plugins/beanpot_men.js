@@ -405,8 +405,8 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
         label
             .attr("x", x(h))
             .text(h);
-        d3.selectAll("path").remove();
-        d3.selectAll(".end-circle").remove();
+        svg.selectAll("path").remove();
+        svg.selectAll(".end-circle").remove();
         // console.log(parsedData);
         drawData(parsedData, h);
     }
