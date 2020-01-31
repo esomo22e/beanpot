@@ -64,8 +64,8 @@ var tooltip = d3.select("#beanpot")
 
 
 d3.queue()
-   .defer(d3.json, "/interactive/2018/10/bubble/data/beanpot.json")
-   .defer(d3.json, "/interactive/2018/10/bubble/data/gameresults.json")
+   .defer(d3.json, "/interactive/2020/02/beanpot/data/beanpot.json")
+   .defer(d3.json, "/interactive/2020/02/beanpot/data/gameresults.json")
    .await(function(error, data, gameresults) {
       if (error) throw error;
 
