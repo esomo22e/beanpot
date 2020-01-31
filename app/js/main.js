@@ -7,13 +7,13 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
 
     var margin = {
         top: 0,
-        right: 200,
+        right: 35,
         bottom: 100,
-        left: 75
+        left: 35
     };
     // var formatDateIntoYear = d3.timeFormat("%y");
     var width = d3.select(targetElement).node().getBoundingClientRect().width - margin.left - margin.right,
-        height = 740 - margin.top - margin.bottom;
+        height = 450 - margin.top - margin.bottom;
 
     var svg = d3.select(targetElement).append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -422,13 +422,13 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
 
     var margin = {
         top: 0,
-        right: 200,
+        right: 35,
         bottom: 100,
-        left: 75
+        left: 35
     };
     // var formatDateIntoYear = d3.timeFormat("%y");
     var width = d3.select(targetElement2).node().getBoundingClientRect().width - margin.left - margin.right,
-        height = 740 - margin.top - margin.bottom;
+        height = 450 - margin.top - margin.bottom;
 
     var svg2 = d3.select(targetElement2).append("svg")
         .attr("width", width + margin.left + margin.right)

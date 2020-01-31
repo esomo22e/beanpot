@@ -37,6 +37,12 @@ text {
   font-size: 14px;
 }
 
+.ticks text {
+   @media (max-width:600px) {
+      display:none;
+   }
+}
+
 .y-label {
   fill: black;
   font-size: 18px;
@@ -202,10 +208,11 @@ text {
 //////////Button
 #button_container{
   display: flex;
-margin-left: auto;
-margin-right: auto;
-width: 25%;
-
+   margin-left: auto;
+   margin-right: auto;
+   @media (min-width:768px) {
+      width: 25%;
+   }
 }
 
 button.chartnav{
