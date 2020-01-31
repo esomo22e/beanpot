@@ -54,12 +54,6 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
           .append("div")
           .style("opacity", 0)
           .attr("class", "tooltip")
-          .style("background-color", "white")
-          .style("border", "solid")
-          .style("border-width", "2px")
-          .style("border-radius", "5px")
-          .style("padding", "5px")
-          .style("position","absolute")
 
        var mouseover = function(d) {
              tooltip
@@ -77,7 +71,7 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
                     gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
                  )
                  .style("left", (d3.event.x + 10) + "px")
-                 .style("top", (d3.event.y + 10) + "px")
+                 .style("top", (d3.event.y + 50) + "px")
             }
 
         }
@@ -408,6 +402,23 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
         svg.selectAll(".end-circle").remove();
         // console.log(parsedData);
         drawData(parsedData, h);
+
+        if (window.innerWidth < 768) {
+           for (var g=0; g<gameresults.length; g++)
+            if (gameresults[g].year == h) {
+               tooltip
+               .style("opacity", 1)
+                 .html(
+                    "<h3>" + h + " Men's Beanpot</h3>" +
+                    "<span class='ttsubhed'>Final</span>" +
+                    gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score +
+                    "<span class='ttsubhed'>Third-Place Game</span>" +
+                    gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
+                 )
+                 .style("left", (d3.event.x + 10) + "px")
+                 .style("top", (d3.event.y + 50) + "px")
+            }
+         }
     }
 
 
