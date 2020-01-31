@@ -66,9 +66,9 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
                  .html(
                     "<h3>" + Math.round(x.invert(d3.mouse(this)[0])) + " Men's Beanpot</h3>" +
                     "<span class='ttsubhed'>Final</span>" +
-                    gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score +
-                    "<span class='ttsubhed'>Third-Place Game</span>" +
-                    gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
+                    gameresults[g].final_winner_team + " <strong>" + gameresults[g].final_winner_score + "</strong>, " + gameresults[g].final_loser_team + " <strong>" + gameresults[g].final_loser_score +
+                    "</strong><span class='ttsubhed'>Third-Place Game</span>" +
+                    gameresults[g].thirdplace_winner_team + " <strong>" + gameresults[g].thirdplace_winner_score + "</strong>, " + gameresults[g].thirdplace_loser_team + " <strong>" + gameresults[g].thirdplace_loser_score + "</strong>"
                  )
                  .style("left", (d3.event.x + 10) + "px")
                  .style("top", (d3.event.y + 10) + "px")
@@ -411,9 +411,9 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
                  .html(
                     "<h3>" + h + " Men's Beanpot</h3>" +
                     "<span class='ttsubhed'>Final</span>" +
-                    gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score +
-                    "<span class='ttsubhed'>Third-Place Game</span>" +
-                    gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
+                    gameresults[g].final_winner_team + " <strong>" + gameresults[g].final_winner_score + "</strong>, " + gameresults[g].final_loser_team + " <strong>" + gameresults[g].final_loser_score +
+                    "</strong><span class='ttsubhed'>Third-Place Game</span>" +
+                    gameresults[g].thirdplace_winner_team + " <strong>" + gameresults[g].thirdplace_winner_score + "</strong>, " + gameresults[g].thirdplace_loser_team + " <strong>" + gameresults[g].thirdplace_loser_score + "</strong>"
                  )
                  .style("left", (d3.event.x + 10) + "px")
                  .style("top", (d3.event.y + 10) + "px")
