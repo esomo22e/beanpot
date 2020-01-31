@@ -24,7 +24,6 @@ document.getElementById("men").addEventListener("click", function menButton(){
 
 
 document.getElementById("women").addEventListener("click", function menButton(){
-    console.log("click women button");
 
 
     document.getElementById("beanpot_chart_women").style.display="block";

@@ -9,10 +9,10 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
         top: 0,
         right: 200,
         bottom: 100,
-        left: 125
+        left: 75
     };
     // var formatDateIntoYear = d3.timeFormat("%y");
-    var width = window.innerWidth - margin.left - margin.right,
+    var width = d3.select(targetElement).node().getBoundingClientRect().width - margin.left - margin.right,
         height = 740 - margin.top - margin.bottom;
 
     var svg = d3.select(targetElement).append("svg")
@@ -67,13 +67,13 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
            }
         var mousemove = function(d) {
            for (var g=0; g<gameresults.length; g++)
-            if (gameresults[g].year == Math.round(x.invert(d3.event.x - margin.left))) {
+            if (gameresults[g].year == Math.round(x.invert(d3.mouse(this)[0]))) {
                tooltip
                  .html(
-                    "<h3>" + Math.round(x.invert(d3.event.x - margin.left)) + " Men's Beanpot</h3>" +
-                    "<h4>Final</h4>" +
+                    "<h3>" + Math.round(x.invert(d3.mouse(this)[0])) + " Men's Beanpot</h3>" +
+                    "<span class='ttsubhed'>Final</span>" +
                     gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score +
-                    "<h4>Third-Place Game</h4>" +
+                    "<span class='ttsubhed'>Third-Place Game</span>" +
                     gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
                  )
                  .style("left", (d3.event.x + 10) + "px")
@@ -397,7 +397,6 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
     }
 
     function moveSlider(h) {
-
         if (h < 1952) { h = 1952 };
         if (h > 2019) { h = 2019};
         h = Math.round(h);
@@ -425,10 +424,10 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
         top: 0,
         right: 200,
         bottom: 100,
-        left: 125
+        left: 75
     };
     // var formatDateIntoYear = d3.timeFormat("%y");
-    var width = window.innerWidth - margin.left - margin.right,
+    var width = d3.select(targetElement2).node().getBoundingClientRect().width - margin.left - margin.right,
         height = 740 - margin.top - margin.bottom;
 
     var svg2 = d3.select(targetElement2).append("svg")
@@ -466,33 +465,45 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
             return y(d.rank);
         });
 
-      var tooltip2 = d3.select(targetElement2)
-         .append("div")
-         .style("opacity", 0)
-         .attr("class", "tooltip")
-         .style("background-color", "white")
-         .style("border", "solid")
-         .style("border-width", "2px")
-         .style("border-radius", "5px")
-         .style("padding", "5px")
-         .style("position","absolute")
+     var tooltip2 = d3.select(targetElement2)
+           .append("div")
+           .style("opacity", 0)
+           .attr("class", "tooltip")
+           .style("background-color", "white")
+           .style("border", "solid")
+           .style("border-width", "2px")
+           .style("border-radius", "5px")
+           .style("padding", "5px")
+           .style("position","absolute")
 
-      var mouseover = function(d) {
-            tooltip2
-              .style("opacity", 1)
-          }
-       var mousemove = function(d) {
-          for (var g=0; g<gameresults.length; g++)
-           if (gameresults[g].year == Math.round(x.invert(d3.event.x - margin.left))) {
+        var mouseover = function(d) {
               tooltip2
-                .html(
-                   "<h3>" + Math.round(x.invert(d3.event.x - margin.left)) + " Women's Beanpot</h3>" +
-                   "<h4>Final</h4>" +
-                   gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score
-                )
-                .style("left", (d3.event.x + 10) + "px")
-                .style("top", (d3.event.y + 10) + "px")
-           }
+                .style("opacity", 1)
+            }
+         var mousemove = function(d) {
+            for (var g=0; g<gameresults.length; g++)
+             if (gameresults[g].thirdplace_winner_team !== "" && gameresults[g].year == Math.round(x.invert(d3.mouse(this)[0]))) {
+                tooltip2
+                  .html(
+                     "<h3>" + Math.round(x.invert(d3.mouse(this)[0])) + " Women's Beanpot</h3>" +
+                     "<span class='ttsubhed'>Final</span>" +
+                     gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score +
+                     "<span class='ttsubhed'>Third-Place Game</span>" +
+                     gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
+                  )
+                  .style("left", (d3.event.x + 10) + "px")
+                  .style("top", (d3.event.y + 10) + "px")
+             } else if (gameresults[g].year == Math.round(x.invert(d3.mouse(this)[0]))) {
+                tooltip2
+                  .html(
+                     "<h3>" + Math.round(x.invert(d3.mouse(this)[0])) + " Women's Beanpot</h3>" +
+                     "<span class='ttsubhed'>Final</span>" +
+                     gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score +
+                     "<span class='ttsubhed'>No Third-Place Game</span>"
+                  )
+                  .style("left", (d3.event.x + 10) + "px")
+                  .style("top", (d3.event.y + 10) + "px")
+             }
 
        }
        var mouseleave = function(d) {
@@ -856,7 +867,6 @@ document.getElementById("men").addEventListener("click", function menButton(){
 
 
 document.getElementById("women").addEventListener("click", function menButton(){
-    console.log("click women button");
 
 
     document.getElementById("beanpot_chart_women").style.display="block";

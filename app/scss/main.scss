@@ -144,6 +144,12 @@ text {
   stroke-width: 1.25px;
 }
 
+.ttsubhed {
+   display:block;
+   margin-top:25px;
+   font-weight:bold;
+}
+
 
 
 //////LEGEND
@@ -202,7 +208,7 @@ width: 25%;
 
 }
 
-button{
+button.chartnav{
   // padding: 10px;
   margin: 0 auto;
   border-radius: 5px;
@@ -212,10 +218,11 @@ button{
   padding: 8px 22px;
   font-size: 14px;
   text-align: center;
+  width: 155px;
+    margin-left: 10px;
 }
 
-button:hover{
+button.chartnav:hover{
   background-color: #baccde; /* Green */
   color: black;
 }
-
