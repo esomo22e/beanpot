@@ -71,7 +71,7 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
                     gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
                  )
                  .style("left", (d3.event.x + 10) + "px")
-                 .style("top", (d3.event.y + 50) + "px")
+                 .style("top", (d3.event.y + 10) + "px")
             }
 
         }
@@ -416,7 +416,7 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
                     gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
                  )
                  .style("left", (d3.event.x + 10) + "px")
-                 .style("top", (d3.event.y + 50) + "px")
+                 .style("top", (d3.event.y + 10) + "px")
             }
          }
     }

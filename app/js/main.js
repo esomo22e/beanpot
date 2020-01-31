@@ -71,7 +71,7 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
                     gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
                  )
                  .style("left", (d3.event.x + 10) + "px")
-                 .style("top", (d3.event.y + 50) + "px")
+                 .style("top", (d3.event.y + 10) + "px")
             }
 
         }
@@ -416,7 +416,7 @@ function beanpotMen(data_men, targetElement, targetSlide, gameresults) {
                     gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
                  )
                  .style("left", (d3.event.x + 10) + "px")
-                 .style("top", (d3.event.y + 50) + "px")
+                 .style("top", (d3.event.y + 10) + "px")
             }
          }
     }
@@ -496,8 +496,8 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
                      "<span class='ttsubhed'>Third-Place Game</span>" +
                      gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
                   )
-                 .style("left", (d3.mouse(this)[0] + 10) + "px")
-                 .style("top", (d3.mouse(this)[1] + 10) + "px")
+                  .style("left", (d3.event.x + 10) + "px")
+                 .style("top", (d3.event.y + 10) + "px")
              } else if (gameresults[g].year == Math.round(x.invert(d3.mouse(this)[0]))) {
                 tooltip2
                   .html(
@@ -507,7 +507,7 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
                      "<span class='ttsubhed'>No Third-Place Game</span>"
                   )
                   .style("left", (d3.event.x + 10) + "px")
-                  .style("top", (d3.event.y + 50) + "px")
+                  .style("top", (d3.event.y + 10) + "px")
              }
 
        }
@@ -845,7 +845,7 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
         if (window.innerWidth < 768) {
            for (var g=0; g<gameresults.length; g++)
             if (gameresults[g].year == h) {
-               tooltip
+               tooltip2
                .style("opacity", 1)
                  .html(
                     "<h3>" + h + " Men's Beanpot</h3>" +
@@ -855,7 +855,7 @@ function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
                     gameresults[g].thirdplace_winner_team + " " + gameresults[g].thirdplace_winner_score + ", " + gameresults[g].thirdplace_loser_team + " " + gameresults[g].thirdplace_loser_score
                  )
                  .style("left", (d3.event.x + 10) + "px")
-                 .style("top", (d3.event.y + 50) + "px")
+                 .style("top", (d3.event.y + 10) + "px")
             }
          }
     }
@@ -874,6 +874,9 @@ d3.queue()
 
             beanpotMen(mdata, "#beanpot_chart_men", "#slider_men", gameresults);
              beanpotWomen(wdata, "#beanpot_chart_women", "#slider_women", wgameresults);
+
+             document.getElementById("beanpot_chart_women").style.display="none";
+             document.getElementById("slider_women").style.display="none";
 
 
 });

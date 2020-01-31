@@ -10,6 +10,9 @@ d3.queue()
             beanpotMen(mdata, "#beanpot_chart_men", "#slider_men", gameresults);
              beanpotWomen(wdata, "#beanpot_chart_women", "#slider_women", wgameresults);
 
+             document.getElementById("beanpot_chart_women").style.display="none";
+             document.getElementById("slider_women").style.display="none";
+
 
 });
 
