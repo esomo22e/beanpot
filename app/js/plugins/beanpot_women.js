@@ -1,4 +1,4 @@
-function beanpotWomen(data_women, targetElement2, targetSlide2) {
+function beanpotWomen(data_women, targetElement2, targetSlide2, gameresults) {
 
     var startDate = new Date("1952-12-26"),
         endDate = new Date("2019-02-19");
@@ -49,6 +49,40 @@ function beanpotWomen(data_women, targetElement2, targetSlide2) {
         .y(function(d) {
             return y(d.rank);
         });
+
+      var tooltip2 = d3.select(targetElement2)
+         .append("div")
+         .style("opacity", 0)
+         .attr("class", "tooltip")
+         .style("background-color", "white")
+         .style("border", "solid")
+         .style("border-width", "2px")
+         .style("border-radius", "5px")
+         .style("padding", "5px")
+         .style("position","absolute")
+
+      var mouseover = function(d) {
+            tooltip2
+              .style("opacity", 1)
+          }
+       var mousemove = function(d) {
+          for (var g=0; g<gameresults.length; g++)
+           if (gameresults[g].year == Math.round(x.invert(d3.event.x - margin.left))) {
+              tooltip2
+                .html(
+                   "<h3>" + Math.round(x.invert(d3.event.x - margin.left)) + " Women's Beanpot</h3>" +
+                   "<h4>Final</h4>" +
+                   gameresults[g].final_winner_team + " " + gameresults[g].final_winner_score + ", " + gameresults[g].final_loser_team + " " + gameresults[g].final_loser_score
+                )
+                .style("left", (d3.event.x + 10) + "px")
+                .style("top", (d3.event.y + 10) + "px")
+           }
+
+       }
+       var mouseleave = function(d) {
+         tooltip2
+           .style("opacity", 0)
+       }
 
     var parsedData = [];
     data_women.forEach(function(d) {
@@ -204,6 +238,15 @@ function beanpotWomen(data_women, targetElement2, targetSlide2) {
         })
         .style("opacity", 0.2);
 
+        var tooltip2grid = svg2.append("rect")
+            .attr("class","tooltip-grid")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("opacity", 0)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave)
+
     var heightSlider = 50;
     var svg2Slider = d3.select(targetSlide2)
         .append("svg")
@@ -271,8 +314,9 @@ function beanpotWomen(data_women, targetElement2, targetSlide2) {
     // drawData(parsedData, 2020);
 
     function drawData(data_test, yearLimit) {
-        // console.log(data_test);
-        // console.log(yearLimit);
+
+
+        d3.select(".tooltip2-grid").remove();
 
         var lines = svg2.append("g")
             .selectAll("path")
@@ -341,11 +385,22 @@ function beanpotWomen(data_women, targetElement2, targetSlide2) {
                 return colour(d.school);
             })
             .style("opacity", 1);
+
+            var tooltipgrid = svg2.append("rect")
+                .attr("class","tooltip-grid")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("opacity", 0)
+                .on("mouseover", mouseover)
+                .on("mousemove", mousemove)
+                .on("mouseleave", mouseleave)
     }
 
     function moveSlider(h) {
-        // console.log(h);
-        // // console.log(x(h));
+
+        if (h < 1952) { h = 1952 };
+        if (h > 2019) { h = 2019};
+        h = Math.round(h);
         handle.attr("cx", x(h));
         label
             .attr("x", x(h))
