@@ -1,4 +1,4 @@
-function beanpotMen(data_men, targetElement, targetSlide) {
+function beanpotWomen(data_women, targetElement2, targetSlide2) {
 
     var startDate = new Date("1952-12-26"),
         endDate = new Date("2019-02-19");
@@ -15,7 +15,7 @@ function beanpotMen(data_men, targetElement, targetSlide) {
     var width = window.innerWidth - margin.left - margin.right,
         height = 740 - margin.top - margin.bottom;
 
-    var svg = d3.select(targetElement).append("svg")
+    var svg2 = d3.select(targetElement2).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -28,7 +28,7 @@ function beanpotMen(data_men, targetElement, targetSlide) {
 
     var list_schools = ["rank_harvard", "rank_nu", "rank_bu", "rank_bc"];
 
-    svg.append("defs").append("clipPath")
+    svg2.append("defs").append("clipPath")
         .attr("id", "clip")
         .append("rect")
         .attr("width", width)
@@ -51,7 +51,7 @@ function beanpotMen(data_men, targetElement, targetSlide) {
         });
 
     var parsedData = [];
-    data_men.forEach(function(d) {
+    data_women.forEach(function(d) {
         // console.log(d);
         var dataObject = {
             school: d.school,
@@ -81,19 +81,20 @@ function beanpotMen(data_men, targetElement, targetSlide) {
         //
     });
 
-    // console.log(parsedData);
-
+    console.log(parsedData);
+    // console.log(parseData);
     var xTickNo = parsedData[0].ranks.length;
     // console.log(xTickNo);
+
     x.domain(d3.extent(parsedData[0].ranks, function(d) {
         // console.log(d);
         return d.year;
     }));
 
-    colour.domain(data_men.map(function(d) {
+    colour.domain(data_women.map(function(d) {
         return d.school;
     }));
-    //Ranks
+
     var ranks = 4;
 
     y.domain([0.75, ranks]);
@@ -117,7 +118,7 @@ function beanpotMen(data_men, targetElement, targetSlide) {
         .ticks(ranks)
         .tickSize(0);
     //
-    var xGroup = svg.append("g");
+    var xGroup = svg2.append("g");
 
     var xAxisElem = xGroup.append("g")
         .attr("transform", "translate(" + [0, height + axisMargin * 1.2] + ")")
@@ -138,7 +139,7 @@ function beanpotMen(data_men, targetElement, targetSlide) {
             return x(d);
         });
 
-    var yGroup = svg.append("g");
+    var yGroup = svg2.append("g");
 
     var yAxisElem = yGroup.append("g")
         .attr("transform", "translate(" + [-axisMargin, 0] + ")")
@@ -163,7 +164,7 @@ function beanpotMen(data_men, targetElement, targetSlide) {
             return y(d);
         });
 
-    var lines = svg.append("g")
+    var lines = svg2.append("g")
         .selectAll("path")
         .data(parsedData)
         .enter().append("path")
@@ -180,7 +181,8 @@ function beanpotMen(data_men, targetElement, targetSlide) {
         .style("stroke-width", cfg.strokeWidth)
         .style("opacity", 0.2);
 
-    var endDots = svg.append("g")
+
+    var endDots = svg2.append("g")
         .selectAll(".end-circle")
         .data(parsedData.filter(function(d) {
             return list_schools.includes(d.school);
@@ -202,16 +204,13 @@ function beanpotMen(data_men, targetElement, targetSlide) {
         })
         .style("opacity", 0.2);
 
-
-
-
     var heightSlider = 50;
-    var svgSlider = d3.select(targetSlide)
+    var svg2Slider = d3.select(targetSlide2)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", heightSlider);
 
-    var slider = svgSlider.append("g")
+    var slider = svg2Slider.append("g")
         .attr("class", "slider")
         .attr("transform", "translate(" + margin.left + "," + heightSlider / 5 + ")");
     // .attr("transform", "translate(0,0)");
@@ -232,7 +231,10 @@ function beanpotMen(data_men, targetElement, targetSlide) {
             .on("start.interrupt", function() {
                 slider.interrupt();
             })
-            .on("start drag", function() {
+            .on("start drag", function(d) {
+                // console.log(d3.event.x);
+                // drawData(parsedData, 2020);
+                console.log(x.invert(d3.event.x));
                 moveSlider(x.invert(d3.event.x));
             }));
 
@@ -266,13 +268,13 @@ function beanpotMen(data_men, targetElement, targetSlide) {
 
 
 
-    // drawData(parsedData, 2020); 
+    // drawData(parsedData, 2020);
 
     function drawData(data_test, yearLimit) {
         // console.log(data_test);
         // console.log(yearLimit);
 
-        var lines = svg.append("g")
+        var lines = svg2.append("g")
             .selectAll("path")
             .data(data_test)
             .enter().append("path")
@@ -289,7 +291,7 @@ function beanpotMen(data_men, targetElement, targetSlide) {
             .style("stroke-width", cfg.strokeWidth)
             .style("opacity", 0.2);
 
-        var lines = svg.append("g")
+        var lines = svg2.append("g")
             .selectAll("path")
             .data(data_test)
             .enter().append("path")
@@ -312,7 +314,7 @@ function beanpotMen(data_men, targetElement, targetSlide) {
             .style("stroke-width", cfg.strokeWidth)
             .style("opacity", 1);
 
-        var endDots = svg.append("g")
+        var endDots = svg2.append("g")
             .selectAll(".end-circle")
             .data(data_test.filter(function(d) {
                 return list_schools.includes(d.school);

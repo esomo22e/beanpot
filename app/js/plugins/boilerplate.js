@@ -3,10 +3,18 @@ document.getElementById("men").addEventListener("click", function menButton(){
     document.getElementById("beanpot_chart_men").style.display="block";
     document.getElementById("slider_men").style.display="block";
 
+    document.getElementById("beanpot_chart_women").style.display="none";
+    document.getElementById("slider_women").style.display="none";
+
+
 
 });
 document.getElementById("women").addEventListener("click", function menButton(){
     console.log("click women button");
+
+    document.getElementById("beanpot_chart_women").style.display="block";
+    document.getElementById("slider_women").style.display="block";
+
      document.getElementById("beanpot_chart_men").style.display="none";
      document.getElementById("slider_men").style.display="none";
 
@@ -15,6 +23,12 @@ d3.json("/interactive/2018/10/bubble/data/beanpot.json", function(error, data) {
     if (error) throw error;
     beanpotMen(data, "#beanpot_chart_men", "#slider_men");
 
+});
+
+d3.json("/interactive/2018/10/bubble/data/beanpots_women.json", function(error, data2){
+    if(error) throw error;
+    // console.log(data);
+    beanpotWomen(data2, "#beanpot_chart_women", "#slider_women");
 });
 // var startDate = new Date("1952-12-26"),
 //     endDate = new Date("2019-02-19");

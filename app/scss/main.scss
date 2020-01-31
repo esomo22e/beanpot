@@ -1,5 +1,6 @@
 body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
 
+
 .x-axis path, .y-axis path {
   display: none;
 }
@@ -208,10 +209,23 @@ p.text{
   display: flex;
 margin-left: auto;
 margin-right: auto;
-width: 10%;
+width: 25%;
+
 }
 
 button{
   // padding: 10px;
-  margin: 0 10px;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color:#385775;
+  color:white;
+  border: none;
+  padding: 8px 22px;
+  font-size: 14px;
+  text-align: center;
+}
+
+button:hover{
+  background-color: #baccde; /* Green */
+  color: black;
 }
