@@ -82,5 +82,9 @@ When you are done writing your JS/SCSS/CSS then you need to compile it.
 
 
 
+<<<<<<< HEAD
 # beanpot
 # beanpot
+=======
+# stem-gender-gap
+>>>>>>> af72b014df0a06ee00d283653eb1881a9cc64de7

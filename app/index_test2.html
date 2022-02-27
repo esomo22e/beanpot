@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <head>
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -303,3 +304,179 @@
 
   </script>
 </body>
+=======
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div id="Dash"></div>
+</body>
+</html>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        drawStackChart();
+    });
+
+
+    //Draw Stack Chart
+    var marginStackChart = { top: 20, right: 20, bottom: 30, left: 40 },
+            widthStackChart = 500 - marginStackChart.left - marginStackChart.right,
+            heightStackChart = 300 - marginStackChart.top - marginStackChart.bottom;
+
+    var xStackChart = d3.scaleBand()
+            .range([0, widthStackChart])
+            .padding(0.1);
+    var yStackChart = d3.scaleLinear()
+                .range([heightStackChart, 0]);
+
+
+    var colorStackChart = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
+
+
+    var canvasStackChart = d3.select("#Dash").append("svg")
+        .attr("width", widthStackChart + marginStackChart.left + marginStackChart.right)
+        .attr("height", heightStackChart + marginStackChart.top + marginStackChart.bottom)
+        .append("g")
+        .attr("transform", "translate(" + marginStackChart.left + "," + marginStackChart.top + ")");
+
+    function drawStackChart() {
+
+
+        var data = [
+             {
+                 "Year": "2012",
+                 "Category1": "20",
+                 "Category2": "5",
+                 "Category3": "5",
+                 "Category4": "5",
+                 "Category5": "5",
+                 "Category6": "5",
+                 "Category7": "5",
+                 "Category8": "5",
+                 "Category9": "5"
+             },
+             {
+                 "Year": "2013",
+                 "Category1": "30",
+                 "Category2": "10",
+                 "Category3": "10",
+                 "Category4": "10",
+                 "Category5": "10",
+                 "Category6": "10",
+                 "Category7": "10",
+                 "Category8": "10",
+                 "Category9": "10"
+             },
+             {
+                 "Year": "2014",
+                 "Category1": "35",
+                 "Category2": "15",
+                 "Category3": "15",
+                 "Category4": "15",
+                 "Category5": "15",
+                 "Category6": "15",
+                 "Category7": "15",
+                 "Category8": "15",
+                 "Category9": "15"
+             },
+             {
+                 "Year": "2015",
+                 "Category1": "60",
+                 "Category2": "20",
+                 "Category3": "20",
+                 "Category4": "20",
+                 "Category5": "20",
+                 "Category6": "20",
+                 "Category7": "20",
+                 "Category8": "20",
+                 "Category9": "20"
+             },
+             {
+                 "Year": "2016",
+                 "Category1": "70",
+                 "Category2": "40",
+                 "Category3": "40",
+                 "Category4": "40",
+                 "Category5": "40",
+                 "Category6": "40",
+                 "Category7": "40",
+                 "Category8": "40",
+                 "Category9": "40"
+             }
+        ];
+
+             console.log(data[0]);
+
+            colorStackChart.domain(d3.keys(data[0]).filter(function (key) { return key !== "Year"; }));
+
+            data.forEach(function (d) {
+                var y0 = 0;
+                d.ages = colorStackChart.domain().map(function (name) { return { name: name, y0: y0, y1: y0 += +d[name] }; });
+                d.total = d.ages[d.ages.length - 1].y1;
+            });
+
+            data.sort(function (a, b) { return b.total - a.total; });
+
+            xStackChart.domain(data.map(function (d) { return d.Year; }));
+            yStackChart.domain([0, d3.max(data, function (d) { return d.total; })]);
+
+            canvasStackChart.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + heightStackChart + ")")
+            .call(d3.axisBottom(xStackChart));
+
+            canvasStackChart.append("g")
+            .attr("class", "y axis")
+            .call(d3.axisLeft(yStackChart))
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("No Of Buildings");
+
+            var state = canvasStackChart.selectAll(".Year")
+            .data(data)
+            .enter().append("g")
+            .attr("class", "g")
+            .attr("transform", function (d) { return "translate(" + xStackChart(d.Year) + ",0)"; });
+
+            state.selectAll("rect")
+            .data(function (d) { return d.ages; })
+            .enter().append("rect")
+            .attr("width", xStackChart.bandwidth())
+            .attr("y", function (d) { return yStackChart(d.y1); })
+            .attr("height", function (d) { return yStackChart(d.y0) - yStackChart(d.y1); })
+            .style("fill", function (d) { return colorStackChart(d.name); });
+
+            var legend = canvasStackChart.selectAll(".legend")
+            .data(colorStackChart.domain().slice().reverse())
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+
+            legend.append("rect")
+            .attr("x", widthStackChart - 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", colorStackChart);
+
+            legend.append("text")
+            .attr("x", widthStackChart - 24)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "end")
+            .text(function (d) { return d; });
+
+
+    }
+
+
+
+</script>
+>>>>>>> af72b014df0a06ee00d283653eb1881a9cc64de7

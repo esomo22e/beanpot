@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .x-axis path, .y-axis path {
   display: none;
@@ -252,3 +253,131 @@ button.chartnav:hover{
   background-color: #baccde; /* Green */
   color: black;
 }
+=======
+#scrolly {
+    position: relative;
+    padding: 1rem;
+  }
+
+  #scrolly article {
+    position: relative;
+    padding: 0;
+    max-width: 50rem;
+    margin: 0 auto;
+  }
+
+g.annotation{
+    font-family: akkurat,sans-serif;
+
+    animation: 3s fadeIn;
+  animation-fill-mode: forwards;
+
+  visibility: hidden;
+}
+
+.annotation-note-content {    font-size: 12px;
+}
+
+#text-label-male{
+  font-family: akkurat,sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+
+    animation: 3s fadeIn;
+  animation-fill-mode: forwards;
+
+  visibility: hidden;
+}
+
+#text-label-fem{
+font-family: akkurat,sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+
+    animation: 4s fadeIn;
+  animation-fill-mode: forwards;
+
+  visibility: hidden;
+}
+//
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+  figure {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    width: 100%;
+    margin: 50px 0 ;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  // figure p {
+  //   text-align: center;
+  //   // padding: 10rem;
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 50%;
+  //   -moz-transform: translate(-50%, -50%);
+  //   -webkit-transform: translate(-50%, -50%);
+  //   transform: translate(-50%, -50%);
+  //   font-size: 8rem;
+  //   font-weight: 900;
+  //   color: #fff;
+  // }
+
+
+  .step {
+    margin: 0 auto 2rem auto;
+    // margin: 0 auto;
+    color: #fff;
+    max-width: 35rem;
+    // background-color: rgba(0,0,0,0.1);
+
+  }
+
+
+  .step:last-child {
+    margin-bottom: 0;
+  }
+
+  .step.is-active .content {
+      background-color: #3b3b3b;
+
+    // color: #3b3b3b;
+    // background-color: #3b3b3b;
+  }
+
+  .step .content {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    box-shadow: 0 0 10px 2px rgba(63,63,63,.25);
+    font-family: 'Khula', sans-serif;
+    border-radius: 10px;
+overflow: auto;
+    // background-color: #3b3b3b;
+    background-color: #e9e9e;
+  }
+
+  .x-axis{
+      font-size: 13px;
+      color:#606060;
+      // font-weight: 600;
+  }
+
+  .y-axis{
+    font-size: 13px;
+    color:#606060;
+
+  }
+>>>>>>> af72b014df0a06ee00d283653eb1881a9cc64de7
